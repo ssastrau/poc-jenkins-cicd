@@ -12,4 +12,5 @@
   roles:
     - common
     - jenkins
+    - jenkins-swarm-agent
     - post
