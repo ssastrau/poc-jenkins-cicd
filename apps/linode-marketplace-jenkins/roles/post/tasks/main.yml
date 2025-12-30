@@ -10,10 +10,6 @@
     src: /var/lib/jenkins/secrets/initialAdminPassword
   register: initial_admin_password
 
-- name: set Jenkins admin password
-  set_fact:
-    jenkins_admin_password: "{{ initial_admin_password.content | b64decode }}"
-
 - name: writing sudo creds into file
   copy:
     dest: '/home/{{ username }}/.credentials'

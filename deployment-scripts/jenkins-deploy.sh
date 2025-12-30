@@ -23,7 +23,7 @@ fi
 # git repo
 export GIT_REPO="https://github.com/ssastrau/poc-jenkins-cicd.git"
 export WORK_DIR="/tmp/poc-jenkins-cicd"
-export MARKETPLACE_APP="jenkins-swarm-app"
+export MARKETPLACE_APP="linode-marketplace-jenkins"
 
 # enable logging
 exec > >(tee /dev/ttyS0 /var/log/stackscript.log) 2>&1
