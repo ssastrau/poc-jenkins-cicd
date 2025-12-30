@@ -10,7 +10,7 @@
   tasks:
     # generate creds
     - name: generating sudo user and password 
-      import_tasks: "{{ playbook_dir }}/../linode_helpers/roles/sudouser/tasks/main.yml"
+      import_tasks: ../linode_helpers/roles/sudouser/tasks/main.yml
 
     - name: generating keystore password
       lineinfile:
