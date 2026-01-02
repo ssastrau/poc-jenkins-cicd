@@ -1,10 +1,4 @@
 ---
-- name: ensure openjdk 11 is installed
-  apt:
-    name: openjdk-11-jre-headless
-    state: present
-    update_cache: yes
-
 - name: create jenkins user for swarm agents
   user:
     name: jenkins

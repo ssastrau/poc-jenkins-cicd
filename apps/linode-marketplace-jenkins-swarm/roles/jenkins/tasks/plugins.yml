@@ -1,0 +1,11 @@
+---
+- name: install jenkins plugins
+  community.general.jenkins_plugin:
+    name: "{{ item }}"
+    url: "{{ default_dns }}"
+    user: "{{ jenkins_admin_user }}"
+    password: "{{ jenkins_admin_pass }}"
+  loop:
+    - swarm
+    - instance-identity
+  notify: restart jenkins
