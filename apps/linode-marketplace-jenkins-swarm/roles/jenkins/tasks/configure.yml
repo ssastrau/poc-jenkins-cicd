@@ -6,6 +6,29 @@
     name: jenkins
     state: stopped
 
+- name: create jenkins init groovy directory
+  file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+    owner: jenkins
+    group: jenkins
+
+- name: disable jenkins setup wizard
+  copy:
+    content: "2.0"
+    dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+    owner: jenkins
+    group: jenkins
+    mode: '0644'
+
+- name: create initial admin user
+  template:
+    src: basic-security.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+
 - name: update jenkins unit file
   lineinfile:
     path: /lib/systemd/system/jenkins.service
