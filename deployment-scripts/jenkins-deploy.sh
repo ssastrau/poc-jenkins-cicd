@@ -18,7 +18,7 @@ fi
 #<UDF name="soa_email_address" label="Admin Email for Let's Encrypt SSL certificate">
 
 ## Jenkins
-#<UDF name="jenkins_version" label="Jenkins Version" oneOf="2.479" default="2.479" >
+#<UDF name="jenkins_version" label="Jenkins Version" oneOf="2.544" default="2.544" >
 
 # git repo
 export GIT_REPO="https://github.com/ssastrau/poc-jenkins-cicd.git"
