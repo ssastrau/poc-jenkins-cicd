@@ -8,7 +8,7 @@ ExecStart=/usr/bin/java -jar /opt/swarm-client.jar \
           -fsroot /var/lib/jenkins/agent{{ item }} \
           -master http://127.0.0.1:8080 \
           -username {{ jenkins_admin_user }} \
-          -password "{{ jenkins_admin_passw }}" \
+          -password "{{ jenkins_admin_pass }}" \
           -executors 1 \
           -mode exclusive
 Restart=always
