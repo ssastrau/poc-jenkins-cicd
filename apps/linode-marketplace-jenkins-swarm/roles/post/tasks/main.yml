@@ -15,4 +15,4 @@
       Sudo Username: {{ username }}
       Sudo Password: {{ password }}
       Jenkins Admin Username: {{ jenkins_admin_user }}
-      Jenkins Admin Password: {{ generated_jenkins_admin_pass }}
+      Jenkins Admin Password: {{ jenkins_admin_pass }}

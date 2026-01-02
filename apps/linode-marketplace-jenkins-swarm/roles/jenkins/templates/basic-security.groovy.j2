@@ -1,20 +1,13 @@
 import jenkins.model.*
 import hudson.security.*
-import jenkins.security.s2m.AdminWhitelistRule
+import jenkins.install.*
 
-def instance = Jenkins.getInstance()
-
-// Create a new user with a hashed password
+def instance = Jenkins.get()
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
-hudsonRealm.createAccount("{{ jenkins_admin_user }}", "#jbcrypt:{{ jenkins_admin_pass_hashed }}")
+hudsonRealm.createAccount('{{ jenkins_admin_user }}', '{{ jenkins_admin_pass }}')
 instance.setSecurityRealm(hudsonRealm)
 
-// Grant admin rights to the new user
-def strategy = new GlobalMatrixAuthorizationStrategy()
-strategy.add(Jenkins.ADMINISTER, "{{ jenkins_admin_user }}")
+def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+strategy.setAllowAnonymousRead(false)
 instance.setAuthorizationStrategy(strategy)
-
-// Allow agent to master access
-instance.getInjector().getInstance(AdminWhitelistRule.class).setMasterKillSwitch(false)
-
 instance.save()

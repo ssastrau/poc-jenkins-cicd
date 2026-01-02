@@ -12,12 +12,7 @@
 
 - name: generate a random password for jenkins admin
   set_fact:
-    generated_jenkins_admin_pass: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits') }}"
-  no_log: true
-
-- name: hash the generated jenkins admin password
-  set_fact:
-    jenkins_admin_pass_hashed: "{{ generated_jenkins_admin_pass | password_hash('bcrypt') }}"
+    jenkins_admin_pass: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits') }}"
   no_log: true
 
 - name: create jenkins init groovy directory
