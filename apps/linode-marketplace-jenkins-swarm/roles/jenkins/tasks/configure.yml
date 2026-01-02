@@ -8,7 +8,7 @@
 
 - name: set jenkins admin username
   set_fact:
-    jenkins_admin_user: {{ username }}
+    jenkins_admin_user: "{{ username }}"
 
 - name: generate a random password for jenkins admin
   set_fact:
