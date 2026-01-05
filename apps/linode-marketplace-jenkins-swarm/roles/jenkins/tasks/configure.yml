@@ -19,24 +19,16 @@
   file:
     path: /var/lib/jenkins/init.groovy.d
     state: directory
-    owner: jenkins
-    group: jenkins
 
 - name: disable jenkins setup wizard
   copy:
     content: "2.0"
     dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-    owner: jenkins
-    group: jenkins
-    mode: '0644'
 
 - name: create initial admin user
   template:
     src: basic-security.groovy.j2
     dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
-    owner: jenkins
-    group: jenkins
-    mode: '0755'
 
 - name: update jenkins unit file
   lineinfile:
@@ -49,6 +41,14 @@
     - { regexp: '^\#?Environment="JENKINS_HTTPS_KEYSTORE=/path/to/keystore.jks"$', line: 'Environment="JENKINS_HTTPS_KEYSTORE=/var/lib/jenkins/jenkins.keystore.jks"' }
     - { regexp: '^\#?Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD=s3cR3tPa55w0rD"$', line: 'Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD={{ keystore_password }}"' }
     - { regexp: '^\#?AmbientCapabilities=CAP_NET_BIND_SERVICE$', line: 'AmbientCapabilities=CAP_NET_BIND_SERVICE' }
+
+- name: set jenkins tcp port for inbound agents to random
+  become: true
+  ansible.builtin.lineinfile:
+    path: /var/lib/jenkins/config.xml
+    regexp: '^\s*<slaveAgentPort>.*</slaveAgentPort>\s*$'
+    line: '  <slaveAgentPort>-1</slaveAgentPort>'
+    backrefs: yes
 
 - name: start jenkins service
   systemd:
