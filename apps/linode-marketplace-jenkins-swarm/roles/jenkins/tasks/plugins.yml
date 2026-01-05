@@ -2,7 +2,7 @@
 - name: wait for jenkins to be available
   ansible.builtin.wait_for:
     host: "{{ _domain }}"
-    port: 442
+    port: 443
     delay: 5
     timeout: 120
 
