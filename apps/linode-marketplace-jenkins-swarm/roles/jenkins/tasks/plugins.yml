@@ -1,8 +1,15 @@
 ---
+- name: wait for jenkins to be available
+  ansible.builtin.wait_for:
+    host: "{{ _domain }}"
+    port: 442
+    delay: 5
+    timeout: 120
+
 - name: install jenkins plugins
   community.general.jenkins_plugin:
     name: "{{ item }}"
-    url: "https://{{ _domain }}"
+    url: "https://{{ _domain }}:443"
     url_username: "{{ jenkins_admin_user }}"
     url_password: "{{ jenkins_admin_pass }}"
   loop:
