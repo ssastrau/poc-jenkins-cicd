@@ -9,7 +9,7 @@
 - name: install jenkins plugins
   community.general.jenkins_plugin:
     name: "{{ item }}"
-    url: "https://{{ _domain }}:443"
+    url: "https://{{ _domain }}"
     url_username: "{{ jenkins_admin_user }}"
     url_password: "{{ jenkins_admin_pass }}"
   loop:
