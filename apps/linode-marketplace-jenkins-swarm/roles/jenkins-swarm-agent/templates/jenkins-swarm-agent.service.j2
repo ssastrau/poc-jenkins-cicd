@@ -6,7 +6,7 @@ After=network.target
 User=jenkins
 ExecStart=/usr/bin/java -jar /opt/swarm-client.jar \
           -fsroot /var/lib/jenkins/agent{{ item }} \
-          -master {{ default_dns }} \
+          -master "https://{{ default_dns }}" \
           -username {{ jenkins_admin_user }} \
           -password "{{ jenkins_admin_pass }}" \
           -executors 1 \
