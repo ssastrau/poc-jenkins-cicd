@@ -54,3 +54,5 @@
   systemd:
     name: jenkins
     state: started
+    daemon_reload: true
+    enabled: yes
