@@ -9,6 +9,3 @@
 
 - name: configure jenkins
   import_tasks: configure.yml
-
-- name: install plugins
-  import_tasks: plugins.yml

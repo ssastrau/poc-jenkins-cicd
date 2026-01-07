@@ -6,6 +6,16 @@
     name: jenkins
     state: stopped
 
+- name: create JCasC directory
+  file:
+    path: /etc/jenkins/
+    state: directory
+
+- name: create JCasC file
+  template:
+    src: jenkins.yaml.j2
+    dest: /etc/jenkins/jenkins.yaml
+
 - name: set jenkins admin username
   set_fact:
     jenkins_admin_user: "{{ username }}"
@@ -14,21 +24,6 @@
   set_fact:
     jenkins_admin_pass: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits') }}"
   no_log: true
-
-- name: create jenkins init groovy directory
-  file:
-    path: /var/lib/jenkins/init.groovy.d
-    state: directory
-
-- name: disable jenkins setup wizard
-  copy:
-    content: "2.0"
-    dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-
-- name: create initial admin user
-  template:
-    src: basic-security.groovy.j2
-    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
 
 - name: update jenkins unit file
   lineinfile:
@@ -41,13 +36,7 @@
     - { regexp: '^\#?Environment="JENKINS_HTTPS_KEYSTORE=/path/to/keystore.jks"$', line: 'Environment="JENKINS_HTTPS_KEYSTORE=/var/lib/jenkins/jenkins.keystore.jks"' }
     - { regexp: '^\#?Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD=s3cR3tPa55w0rD"$', line: 'Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD={{ keystore_password }}"' }
     - { regexp: '^\#?AmbientCapabilities=CAP_NET_BIND_SERVICE$', line: 'AmbientCapabilities=CAP_NET_BIND_SERVICE' }
-
-- name: set jenkins tcp port for inbound agents to random
-  ansible.builtin.lineinfile:
-    path: /var/lib/jenkins/config.xml
-    regexp: '^\s*<slaveAgentPort>.*</slaveAgentPort>\s*$'
-    line: '  <slaveAgentPort>0</slaveAgentPort>'
-    backrefs: yes
+    - { regexp: '^\#?Environment="CASC_JENKINS_CONFIG"$', line: 'Environment="CASC_JENKINS_CONFIG=/etc/jenkins/jenkins.yaml"' }
 
 - name: start jenkins service
   systemd:

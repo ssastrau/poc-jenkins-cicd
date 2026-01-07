@@ -1,0 +1,16 @@
+security:
+  local:
+    allowsSignup: false
+    users:
+      - id: "{{ jenkins_admin_user }}"
+        password: "{{ jenkins_admin_pass }}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+jenkins:
+  slaveAgentPort: 0
+
+plugins:
+  - id: swarm
+  - id: instance-identity
