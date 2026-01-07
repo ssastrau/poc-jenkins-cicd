@@ -15,4 +15,7 @@
     other_certificates: "/etc/letsencrypt/live/{{ _domain}}/fullchain.pem"
     other_certificates_parse_all: true
     passphrase: "{{ keystore_password }}"
+    owner: jenkins
+    group: jenkins
+    mode: 0640
     state: present

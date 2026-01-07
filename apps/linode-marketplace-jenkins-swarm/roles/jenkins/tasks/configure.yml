@@ -36,7 +36,12 @@
     - { regexp: '^\#?Environment="JENKINS_HTTPS_KEYSTORE=/path/to/keystore.jks"$', line: 'Environment="JENKINS_HTTPS_KEYSTORE=/var/lib/jenkins/jenkins.keystore.jks"' }
     - { regexp: '^\#?Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD=s3cR3tPa55w0rD"$', line: 'Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD={{ keystore_password }}"' }
     - { regexp: '^\#?AmbientCapabilities=CAP_NET_BIND_SERVICE$', line: 'AmbientCapabilities=CAP_NET_BIND_SERVICE' }
-    - { regexp: '^\#?Environment="CASC_JENKINS_CONFIG"$', line: 'Environment="CASC_JENKINS_CONFIG=/etc/jenkins/jenkins.yaml"' }
+
+- name: add jenkins config to
+  lineinfile:
+    path: /lib/systemd/system/jenkins.service
+    insertafter: '^[Service]'
+    line: 'Environment="CASC_JENKINS_CONFIG=/etc/jenkins/jenkins.yaml"'
 
 - name: start jenkins service
   systemd:
