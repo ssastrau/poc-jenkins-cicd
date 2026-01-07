@@ -1,4 +1,0 @@
----
-jenkins_swarm_agent_count: 3
-jenkins_swarm_client_version: "3.51"
-jenkins_swarm_client_url: "https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/{{ jenkins_swarm_client_version }}/swarm-client-{{ jenkins_swarm_client_version }}.jar"

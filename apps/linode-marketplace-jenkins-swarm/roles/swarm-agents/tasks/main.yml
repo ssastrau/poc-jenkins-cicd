@@ -1,0 +1,29 @@
+---
+- name: create jenkins user for swarm agents
+  user:
+    name: jenkins
+    shell: /bin/bash
+    system: yes
+    home: /var/lib/jenkins
+
+- name: download swarm client
+  get_url:
+    url: "{{ swarm_client_url }}"
+    dest: /opt/swarm-client.jar
+
+- name: create swarm agent systemd service from template
+  template:
+    src: swarm-agents.service.j2
+    dest: "/etc/systemd/system/swarm-agent-{{ item }}.service"
+  with_sequence: "count={{ swarm_agent_count }}"
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: restart swarm agents
+  systemd:
+    name: "swarm-agents-{{ item }}.service"
+    state: restarted
+  with_sequence: "count={{ swarm_agent_count }}"
+

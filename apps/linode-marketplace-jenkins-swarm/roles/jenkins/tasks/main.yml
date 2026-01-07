@@ -7,8 +7,11 @@
 - name: obtain let's encrypt certificate
   import_tasks: ssl.yml
 
+- name: setup jenkins credentials
+  import_tasks: credentials.yml
+
 - name: configure jenkins
   import_tasks: configure.yml
 
-- name: install jenkins plugins
-  import_tasks: plugins.yml
+#- name: install jenkins plugins
+#  import_tasks: plugins.yml
