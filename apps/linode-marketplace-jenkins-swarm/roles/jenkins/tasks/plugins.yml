@@ -18,4 +18,10 @@
     - instance-identity
     - workflow-aggregator
     - git
-  notify: restart jenkins
+
+- name: restart jenkins
+  systemd:
+    name: jenkins
+    state: restarted
+    daemon_reload: true
+    enabled: yes
