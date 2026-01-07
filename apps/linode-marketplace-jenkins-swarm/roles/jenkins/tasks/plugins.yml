@@ -16,4 +16,6 @@
     - configuration-as-code
     - swarm
     - instance-identity
+    - workflow-aggregator
+    - git
   notify: restart jenkins

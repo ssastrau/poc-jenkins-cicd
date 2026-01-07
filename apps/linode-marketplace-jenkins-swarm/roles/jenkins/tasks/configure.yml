@@ -15,6 +15,21 @@
     jenkins_admin_pass: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits') }}"
   no_log: true
 
+- name: create jenkins init groovy directory
+  file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+
+- name: disable jenkins setup wizard
+  copy:
+    content: "2.0"
+    dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+
+- name: create initial admin user
+  template:
+    src: basic-security.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+
 - name: create JCasC directory
   file:
     path: /etc/jenkins/
