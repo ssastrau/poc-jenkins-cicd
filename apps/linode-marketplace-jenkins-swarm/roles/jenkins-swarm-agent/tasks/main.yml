@@ -10,15 +10,11 @@
   get_url:
     url: "{{ jenkins_swarm_client_url }}"
     dest: /opt/swarm-client.jar
-    mode: '0755'
 
 - name: create jenkins swarm agent systemd service from template
   template:
     src: jenkins-swarm-agent.service.j2
     dest: "/etc/systemd/system/jenkins-swarm-agent-{{ item }}.service"
-    owner: root
-    group: root
-    mode: '0644'
   with_sequence: "count={{ jenkins_swarm_agent_count }}"
   notify:
     - reload systemd
