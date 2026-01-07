@@ -6,6 +6,15 @@
     name: jenkins
     state: stopped
 
+- name: set jenkins admin username
+  set_fact:
+    jenkins_admin_user: "{{ username }}"
+
+- name: generate a random password for jenkins admin
+  set_fact:
+    jenkins_admin_pass: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits') }}"
+  no_log: true
+
 - name: create JCasC directory
   file:
     path: /etc/jenkins/
@@ -15,15 +24,6 @@
   template:
     src: jenkins.yaml.j2
     dest: /etc/jenkins/jenkins.yaml
-
-- name: set jenkins admin username
-  set_fact:
-    jenkins_admin_user: "{{ username }}"
-
-- name: generate a random password for jenkins admin
-  set_fact:
-    jenkins_admin_pass: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits') }}"
-  no_log: true
 
 - name: update jenkins unit file
   lineinfile:
