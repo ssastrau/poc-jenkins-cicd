@@ -13,11 +13,15 @@
     url_username: "{{ jenkins_admin_user }}"
     url_password: "{{ jenkins_admin_pass }}"
   loop:
-    - configuration-as-code
-    - swarm
-    - instance-identity
-    - workflow-aggregator
     - git
+    - github-branch-source
+    - job-dsl
+    - instance-identity
+    - swarm
+    - workflow-aggregator
+    - pipeline-stage-view
+    - pipeline-github-lib
+    - configuration-as-code
 
 - name: restart jenkins
   systemd:
