@@ -23,7 +23,7 @@
 
 - name: restart swarm agents
   systemd:
-    name: "swarm-agents-{{ item }}.service"
+    name: "swarm-agent-{{ item }}.service"
     state: restarted
   with_sequence: "count={{ swarm_agent_count }}"
 
