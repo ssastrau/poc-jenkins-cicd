@@ -1,17 +1,9 @@
 pipeline {
   agent any
+  when {
+    expression { env.CHANGE_ID }
+  }
   stages {
-    stage('Info') {
-      steps {
-        script {
-          if (env.CHANGE_ID) {
-            echo "This is a PR build: #${env.CHANGE_ID}, source branch: ${env.CHANGE_BRANCH}, target branch: ${env.CHANGE_TARGET}"
-          } else {
-            echo "This is a branch build: ${env.BRANCH_NAME}"
-          }
-        }
-      }
-    }
     stage('Static Code Analysis') {
       steps {
         echo 'Running Static Code Analysis tools...'
