@@ -6,7 +6,7 @@ pipeline {
         script {
           publishChecks name: 'Static Code Analysis',
           summary: 'Running Static Code Analysis tools...',
-          detailsURL: env.BUILD_URL
+          text: "Open Jenkins job: [${env.BUILD_URL}](${env.BUILD_URL})"
           echo 'Running Static Code Analysis tools...'
         }
       }
@@ -15,8 +15,7 @@ pipeline {
       steps {
         script {
           publishChecks name: 'Linode provisioning stage',
-          summary: 'Provisioning Linode',
-          detailsURL: env.BUILD_URL
+          summary: 'Provisioning Linode'
           def userInput = input(
             message: 'Provision your Linode',
             parameters: [
@@ -32,8 +31,7 @@ pipeline {
       steps {
         script {
           publishChecks name: 'App deployment stage',
-          summary: 'Deploying the app',
-          detailsURL: env.BUILD_URL
+          summary: 'Deploying the app'
           def deployment = input(
             message: 'Select App deployment method:',
             parameters: [
@@ -48,8 +46,7 @@ pipeline {
       steps {
         script {
           publishChecks name: 'Deployment Tests',
-          summary: 'Running Deployment Tests...',
-          detailsURL: env.BUILD_URL
+          summary: 'Running Deployment Tests...'
           echo 'Running tests...'
         }
       }
@@ -58,8 +55,7 @@ pipeline {
       steps {
         script {
           publishChecks name: 'Linode deletion stage',
-          summary: 'Deleting the Linode',
-          detailsURL: env.BUILD_URL
+          summary: 'Deleting the Linode'
           def confirm = input(
             message: 'Do you want to delete the Linode?',
             parameters: [
@@ -78,8 +74,7 @@ pipeline {
       steps {
         script {
           publishChecks name: 'Report stage',
-          summary: 'Sending report...',
-          detailsURL: env.BUILD_URL
+          summary: 'Sending report...'
           echo 'Sending report...'
         }
       }
