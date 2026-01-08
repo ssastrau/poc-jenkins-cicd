@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('Comment on PR') {
+      steps {
+        githubPrComment comment: "Jenkins build for this PR: ${env.BUILD_URL}"
+      }
+    }
     stage('Static Code Analysis') {
       steps {
         script {
