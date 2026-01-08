@@ -4,7 +4,9 @@ pipeline {
     stage('Static Code Analysis') {
       steps {
         script {
-          publishChecks name: 'Static Code Analysis', summary: 'Running Static Code Analysis tools...'
+          publishChecks name: 'Static Code Analysis',
+          summary: 'Running Static Code Analysis tools...',
+          detailsURL: env.BUILD_URL
           echo 'Running Static Code Analysis tools...'
         }
       }
@@ -12,7 +14,9 @@ pipeline {
     stage('Linode provisioning stage') {
       steps {
         script {
-          publishChecks name: 'Linode provisioning stage', summary: 'Provisioning Linode'
+          publishChecks name: 'Linode provisioning stage',
+          summary: 'Provisioning Linode',
+          detailsURL: env.BUILD_URL
           def userInput = input(
             message: 'Provision your Linode',
             parameters: [
@@ -27,7 +31,9 @@ pipeline {
     stage('App deployment stage') {
       steps {
         script {
-          publishChecks name: 'App deployment stage', summary: 'Deploying the app'
+          publishChecks name: 'App deployment stage',
+          summary: 'Deploying the app',
+          detailsURL: env.BUILD_URL
           def deployment = input(
             message: 'Select App deployment method:',
             parameters: [
@@ -41,7 +47,9 @@ pipeline {
     stage('Deployment Tests') {
       steps {
         script {
-          publishChecks name: 'Deployment Tests', summary: 'Running Deployment Tests...'
+          publishChecks name: 'Deployment Tests',
+          summary: 'Running Deployment Tests...',
+          detailsURL: env.BUILD_URL
           echo 'Running tests...'
         }
       }
@@ -49,7 +57,9 @@ pipeline {
     stage('Linode deletion stage') {
       steps {
         script {
-          publishChecks name: 'Linode deletion stage', summary: 'Deleting the Linode'
+          publishChecks name: 'Linode deletion stage',
+          summary: 'Deleting the Linode',
+          detailsURL: env.BUILD_URL
           def confirm = input(
             message: 'Do you want to delete the Linode?',
             parameters: [
@@ -67,7 +77,9 @@ pipeline {
     stage('Report stage') {
       steps {
         script {
-          publishChecks name: 'Report stage', summary: 'Sending report...'
+          publishChecks name: 'Report stage',
+          summary: 'Sending report...',
+          detailsURL: env.BUILD_URL
           echo 'Sending report...'
         }
       }
