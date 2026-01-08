@@ -1,16 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Comment on PR') {
-      steps {
-        script {
-        def jobUrl = env.BUILD_URL.replaceFirst(/\/\d+\/?$/, '/')
-        def comment = pullRequest.comment("Jenkins job link: [${jobUrl}](${jobUrl})")}
-      }
-    }
     stage('Static Code Analysis') {
       steps {
         script {
+          def jobUrl = env.BUILD_URL.replaceFirst(/\/\d+\/?$/, '/')
+          def comment = pullRequest.comment("Jenkins job link: [${jobUrl}](${jobUrl})")}
           publishChecks name: 'Static Code Analysis',
           summary: 'Running Static Code Analysis tools...',
           text: "Open Jenkins job: [${env.BUILD_URL}](${env.BUILD_URL})"
