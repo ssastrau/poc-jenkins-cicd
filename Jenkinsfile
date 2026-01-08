@@ -3,14 +3,14 @@ pipeline {
   stages {
     stage('Static Code Analysis') {
       steps {
-        githubChecks(name: 'Static Code Analysis') {
+        publishChecks(name: 'Static Code Analysis') {
           echo 'Running Static Code Analysis tools...'
         }
       }
     }
     stage('Linode provisioning stage') {
       steps {
-        githubChecks(name: 'Linode provisioning stage') {
+        publishChecks(name: 'Linode provisioning stage') {
           script {
             def userInput = input(
               message: 'Provision your Linode',
@@ -26,14 +26,14 @@ pipeline {
     }
     stage('Linode Tests') {
       steps {
-        githubChecks(name: 'Linode Tests') {
+        publishChecks(name: 'Linode Tests') {
           echo 'Running tests on provisioned Linode...'
         }
       }
     }
     stage('App deployment stage') {
       steps {
-        githubChecks(name: 'App deployment stage') {
+        publishChecks(name: 'App deployment stage') {
           script {
             def deployment = input(
               message: 'Select App deployment method:',
@@ -48,14 +48,14 @@ pipeline {
     }
     stage('Deployment Tests') {
       steps {
-        githubChecks(name: 'Deployment Tests') {
+        publishChecks(name: 'Deployment Tests') {
           echo 'Running tests after app deployment...'
         }
       }
     }
     stage('Linode deletion stage') {
       steps {
-        githubChecks(name: 'Linode deletion stage') {
+        publishChecks(name: 'Linode deletion stage') {
           script {
             def confirm = input(
               message: 'Do you want to delete the Linode?',
@@ -74,7 +74,7 @@ pipeline {
     }
     stage('Report stage') {
       steps {
-        githubChecks(name: 'Report stage') {
+        publishChecks(name: 'Report stage') {
           echo 'Sending report to the team...'
         }
       }
