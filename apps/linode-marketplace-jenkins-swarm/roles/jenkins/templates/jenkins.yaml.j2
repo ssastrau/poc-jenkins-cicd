@@ -11,17 +11,12 @@ jenkins:
   slaveAgentPort: 0
 
 jobs:
-  - multibranchPipelineJob('Demo development pipeline') {
-      branchSources {
-        git {
-          id('demo-dev-pipeline-id')
-          remote('https://github.com/ssastrau/poc-jenkins-cicd.git')
-        }
+  - script: |
+      multibranchPipelineJob('multibranch-dev-pipeline') {
+          branchSources {
+              git {
+                  id = 'demo-dev-pipeline'
+                  remote('https://github.com/ssastrau/poc-jenkins-cicd.git')
+              }
+          }
       }
-      orphanedItemStrategy {
-        discardOldItems {
-          daysToKeep(14)
-          numToKeep(20)
-        }
-      }
-    }
