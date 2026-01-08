@@ -4,7 +4,7 @@ pipeline {
     stage('Comment on PR') {
       steps {
         script {
-        def comment = pullRequest.comment("Open Jenkins job: [${env.BUILD_URL}](${env.BUILD_URL})")}
+        def comment = pullRequest.comment("Open Jenkins: [${env.BUILD_URL}](${env.BUILD_URL})")}
       }
     }
     stage('Static Code Analysis') {
