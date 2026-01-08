@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Static Code Analysis') {
+    stage('1. Static Code Analysis') {
       steps {
         script {
           def jobUrl = env.BUILD_URL.replaceFirst(/\/\d+\/?$/, '/')
@@ -13,7 +13,7 @@ pipeline {
         }
       }
     }
-    stage('Linode provisioning stage') {
+    stage('2. Linode provisioning stage') {
       steps {
         script {
           publishChecks name: 'Linode provisioning stage',
@@ -29,7 +29,7 @@ pipeline {
         }
       }
     }
-    stage('App deployment stage') {
+    stage('3. App deployment stage') {
       steps {
         script {
           publishChecks name: 'App deployment stage',
@@ -44,7 +44,7 @@ pipeline {
         }
       }
     }
-    stage('Deployment Tests') {
+    stage('4. Deployment Tests') {
       steps {
         script {
           publishChecks name: 'Deployment Tests',
@@ -53,7 +53,7 @@ pipeline {
         }
       }
     }
-    stage('Linode deletion stage') {
+    stage('5. Linode deletion stage') {
       steps {
         script {
           publishChecks name: 'Linode deletion stage',
@@ -72,7 +72,7 @@ pipeline {
         }
       }
     }
-    stage('Report stage') {
+    stage('6. Report stage') {
       steps {
         script {
           publishChecks name: 'Report stage',
