@@ -4,7 +4,8 @@ pipeline {
     stage('Comment on PR') {
       steps {
         script {
-        def comment = pullRequest.comment("Open Jenkins: [${env.BUILD_URL}](${env.BUILD_URL})")}
+        def jobUrl = env.BUILD_URL.replaceFirst(/\/\d+\/?$/, '/')
+        def comment = pullRequest.comment("Jenkins job link: [${jobUrl}](${jobUrl})")}
       }
     }
     stage('Static Code Analysis') {
