@@ -5,12 +5,9 @@
   ansible.builtin.blockinfile:
     path: /etc/jenkins/jenkins.yaml
     block: "{{ lookup('template', 'jenkins-pipeline.yaml.j2') }}"
+    marker: ""
 
-- name: reload jenkins configuration
-  ansible.builtin.uri:
-    url: "https://{{ _domain }}/configuration-as-code/reload"
-    method: POST
-    user: "{{ jenkins_admin_user }}"
-    password: "{{ jenkins_admin_pass }}"
-    force_basic_auth: true
-    status_code: 200
+- name: restart jenkins
+  systemd:
+    name: jenkins
+    state: restarted
