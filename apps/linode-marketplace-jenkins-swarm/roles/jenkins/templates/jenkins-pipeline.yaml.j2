@@ -1,0 +1,10 @@
+jobs:
+  - script: |
+      multibranchPipelineJob('multibranch-dev-pipeline') {
+          branchSources {
+              git {
+                  id = 'demo-dev-pipeline'
+                  remote('https://github.com/ssastrau/poc-jenkins-cicd.git')
+              }
+          }
+      }

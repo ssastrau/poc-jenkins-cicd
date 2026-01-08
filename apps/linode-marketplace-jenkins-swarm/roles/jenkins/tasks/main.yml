@@ -15,3 +15,6 @@
 
 - name: install jenkins plugins
   import_tasks: plugins.yml
+
+- name: create jenkins pipelines
+  import_tasks: pipelines.yml

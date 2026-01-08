@@ -9,14 +9,3 @@ jenkins:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: false
   slaveAgentPort: 0
-
-jobs:
-  - script: |
-      multibranchPipelineJob('multibranch-dev-pipeline') {
-          branchSources {
-              git {
-                  id = 'demo-dev-pipeline'
-                  remote('https://github.com/ssastrau/poc-jenkins-cicd.git')
-              }
-          }
-      }
