@@ -15,6 +15,7 @@
   loop:
     - git
     - github-branch-source
+    - github-checks
     - job-dsl
     - instance-identity
     - swarm
