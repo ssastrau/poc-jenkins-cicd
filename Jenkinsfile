@@ -5,6 +5,11 @@ pipeline {
       steps {
         script {
           def jobUrl = env.BUILD_URL.replaceFirst(/\/\d+\/?$/, '/')
+          pullRequest.comments().each { c ->
+            if (c.body?.contains(jobUrl)) {
+                c.delete()
+            }
+          }
           pullRequest.comment("Jenkins job link: [${jobUrl}](${jobUrl})")
 
           try {
