@@ -117,7 +117,7 @@ pipeline {
                 ]
               ]
             )
-            echo "Deploying the app: ${deployment.app}"
+            echo "Deploying the app: ${deployment}"
             publishChecks(
               name: '3. App deployment stage',
               summary: 'App deployed successfully!',
