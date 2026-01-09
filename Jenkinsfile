@@ -74,7 +74,7 @@ pipeline {
                 ]
               ]
             )
-            echo "Provisioning Linode: ${userInput['plan']} in region: ${userInput['region']}"
+            echo "Provisioning Linode: ${userInput.plan]} in region: ${userInput.region}"
             publishChecks(
               name: '2. Linode provisioning stage',
               summary: 'Linode provisioned successfully!',
@@ -117,7 +117,7 @@ pipeline {
                 ]
               ]
             )
-            echo "Deploying the app: ${deployment['app']}"
+            echo "Deploying the app: ${deployment.app}"
             publishChecks(
               name: '3. App deployment stage',
               summary: 'App deployed successfully!',
