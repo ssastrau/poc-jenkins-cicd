@@ -1,4 +1,5 @@
 ---
+
 - name: wait for jenkins to be available
   ansible.builtin.wait_for:
     host: "{{ _domain }}"
