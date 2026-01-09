@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  when {
+    expression { return env.CHANGE_ID }
+  }
   stages {
     stage('1. Static Code Analysis') {
       steps {
