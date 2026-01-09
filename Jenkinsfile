@@ -74,7 +74,7 @@ pipeline {
                 ]
               ]
             )
-            echo "Provisioning Linode: ${userInput.plan]} in region: ${userInput.region}"
+            echo "Provisioning Linode: ${userInput.plan} in region: ${userInput.region}"
             publishChecks(
               name: '2. Linode provisioning stage',
               summary: 'Linode provisioned successfully!',
